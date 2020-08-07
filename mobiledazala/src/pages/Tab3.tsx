@@ -27,7 +27,7 @@ type Cart = Dictionary<CartItem>
 
 
 
-const addItem = function(id:string, cart:Cart):Cart { // TODO:fixme 
+const addItem = function(id:string, cart:Cart): Promise<Cart> { // TODO:fixme 
   if ((id != null) && (id.length > 0)) {
     if ( cart[id] == null) {
       cart[id] = { id:id, qty:1 };
@@ -35,8 +35,15 @@ const addItem = function(id:string, cart:Cart):Cart { // TODO:fixme
       cart[id].qty += 1 
     }
   }
-  return cart
-}
+  return new Promise(function (resolve, reject){
+    if (cart){
+      resolve(cart)
+    } else{
+      reject("Error")
+    }
+    return promises;
+  })
+};
 
 function allItems(cart:Cart): CartItem[] { 
   let res = new Array<CartItem>()
