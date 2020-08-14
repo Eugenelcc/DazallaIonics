@@ -28,7 +28,7 @@ type Cart = Dictionary<CartItem> //Cart = Dictionary
 
   
 
-const addItem = async function (id: string, cart: Cart): Promise<Cart>{// TODO:fixme
+const addItem = async function (id: string, cart: Cart): Promise<Cart>{// Eugene Lay 
   
   if ((id != null) && (id.length > 0)) {
     if ( cart[id] == null) {
@@ -42,7 +42,7 @@ const addItem = async function (id: string, cart: Cart): Promise<Cart>{// TODO:f
   })
 }
 
-function allItems(cart:Cart): CartItem[] { 
+function allItems(cart: Cart): CartItem[] { // Eugene Lay 
   let res = new Array<CartItem>()
   for (const items of Object.keys(cart)) {
     res.push(cart[items]);
@@ -54,7 +54,7 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
   const [showLoading, setShowLoading] = useState<boolean>(true);
   const [ cart, setCart  ] = useLocalStorage<Cart>('cart', {});
 
-  const fetchProducts = async () => {
+  const fetchProducts = async () => {// Eugene Lay 
     fetch(`https://localhost:5001/api/product/get/${match.params.id}`)
       .then(res => res.json())
       .then(setCart)
