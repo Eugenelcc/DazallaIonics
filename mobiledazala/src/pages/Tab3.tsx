@@ -5,6 +5,7 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { RouteComponentProps } from 'react-router';
 import useLocalStorage from '../components/LocalStorage'
+import { cartOutline } from 'ionicons/icons';
 
 interface CartPageProps extends RouteComponentProps<{
   id: string;
@@ -63,7 +64,7 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
 
   useEffect(() => { 
     fetchProducts()
-    addItem(match.params.id, Cart)
+
     
 
     
