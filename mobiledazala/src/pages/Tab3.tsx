@@ -23,11 +23,12 @@ interface Dictionary<T> {
   [Key: string]: T;
 }
 
-type Cart = Dictionary<CartItem>
+type Cart = Dictionary<CartItem> //Cart = Dictionary 
 
+  
 
-
-const addItem = function(id:string, cart:Cart):Cart { // TODO:fixme 
+const addItem = async function (id: string, cart: Cart): Promise<Cart>{// TODO:fixme
+  
   if ((id != null) && (id.length > 0)) {
     if ( cart[id] == null) {
       cart[id] = { id:id, qty:1 };
@@ -35,21 +36,37 @@ const addItem = function(id:string, cart:Cart):Cart { // TODO:fixme
       cart[id].qty += 1 
     }
   }
-  return cart
+  return new Promise((resolve, reject) => {
+    resolve (cart)  
+  })
 }
 
 function allItems(cart:Cart): CartItem[] { 
   let res = new Array<CartItem>()
-  // TODO: fixme
-  return res
+  for (const items of Object.keys(cart)) {
+    res.push(cart[items]);
+  }
+  return res;
 }
 
 const Tab3: React.FC<CartPageProps> = ({match}) => {
   const [showLoading, setShowLoading] = useState<boolean>(true);
   const [ cart, setCart  ] = useLocalStorage<Cart>('cart', {});
 
+  const fetchProducts = async () => {
+    fetch(`https://localhost:5001/api/product/get/${match.params.id}`)
+      .then(res => res.json())
+      .then(setCart)
+      .finally(() => setShowLoading(false))
+  }
+
+
   useEffect(() => { 
-    // TODO: fixme 
+    fetchProducts()
+    addItem(match.params.id, Cart)
+    
+
+    
   }, [cart])
 
   return (
@@ -71,9 +88,7 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
           message={'Loading...'}
         />
         <IonList>
-          {
-            // TODO:fixme
-          }
+         {}
         </IonList>
       </IonContent>
     </IonPage>
