@@ -1,3 +1,7 @@
+// Eugene Lay Chai Chun - 190507X
+//Koh Fu Wei Andrew - 190406Y
+//Ernest Wang Xin Yan - 192185H
+
 import React from 'react';
 import { useState, useEffect } from "react"; 
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonLoading, IonList, IonItem, IonLabel } from '@ionic/react';

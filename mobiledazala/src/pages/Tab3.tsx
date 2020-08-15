@@ -1,3 +1,10 @@
+// Eugene Lay Chai Chun - 190507X
+//Koh Fu Wei Andrew - 190406Y
+//Ernest Wang Xin Yan - 192185H
+
+
+
+
 import React from 'react';
 import { useState, useEffect, useReducer } from "react";
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonLoading, IonList, IonTextarea, IonGrid, IonRow, IonCol, IonButton } from '@ionic/react';
@@ -5,9 +12,10 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { RouteComponentProps } from 'react-router';
 import useLocalStorage from '../components/LocalStorage'
-
+import { useIonViewDidEnter } from '@ionic/react';
 interface CartPageProps extends RouteComponentProps<{
   id: string;
+  name?: string
 }> { }
 
 interface CartItem {
@@ -56,7 +64,7 @@ const Tab3: React.FC<CartPageProps> = ({ match }) => {
   const [cart, setCart] = useLocalStorage<Cart>('cart', {});
 
 
-  useEffect(() => {
+    useIonViewDidEnter(() => {
     fetch(`https://localhost:5001/api/product/get/${match.params.id}`)
     
       addItem(match.params.id, cart)
